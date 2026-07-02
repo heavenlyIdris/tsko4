@@ -1,11 +1,11 @@
 -- CreateTable
 CREATE TABLE "Vote" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" SERIAL PRIMARY KEY,
     "fightId" INTEGER NOT NULL,
     "fighter" TEXT NOT NULL,
     "voterId" TEXT NOT NULL,
     "ipAddress" TEXT NOT NULL,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 -- CreateIndex

@@ -33,8 +33,7 @@ COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/public ./public
 
-# Create the data directory for SQLite and give the app user ownership
-RUN mkdir -p /app/prisma && chown -R nextjs:nodejs /app
+RUN chown -R nextjs:nodejs /app
 
 USER nextjs
 
