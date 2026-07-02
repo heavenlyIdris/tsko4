@@ -10,7 +10,11 @@ interface Fighter {
   flipHorizontal?: boolean
   scale?: number
   mobileScale?: number
+  mobileShiftX?: number
   mobileShiftY?: number
+  mobileObjectPosition?: string
+  desktopShiftX?: number
+  desktopObjectPosition?: string
 }
 
 interface FightCardProps {
@@ -144,8 +148,12 @@ export function FightCard({ fightId, fightLabel, fighterA, fighterB, mockVotes, 
 
   const wrapperStyle = (fighter: Fighter): React.CSSProperties => ({
     '--d-scale': fighter.scale ?? 1,
-    '--m-scale': fighter.mobileScale ?? 1,
-    '--m-shift': `${fighter.mobileShiftY ?? 0}%`,
+    '--m-scale': fighter.mobileScale ?? 1.28,
+    '--m-shift-x': `${fighter.mobileShiftX ?? 0}%`,
+    '--m-shift': `${fighter.mobileShiftY ?? -6}%`,
+    '--d-shift-x': `${fighter.desktopShiftX ?? 0}%`,
+    '--m-object-position': fighter.mobileObjectPosition ?? "center bottom",
+    '--d-object-position': fighter.desktopObjectPosition ?? "center bottom",
   } as React.CSSProperties)
 
   return (
@@ -185,7 +193,7 @@ export function FightCard({ fightId, fightLabel, fighterA, fighterB, mockVotes, 
         </div>
 
         {/* Fighters and center text */}
-        <div className="relative flex-1 flex items-stretch">
+        <div className="relative flex-1 flex items-stretch overflow-hidden">
           {/* Left bar - height scales like a progress bar with fighter A votes */}
           <div className={`shrink-0 flex flex-col justify-end ml-4 md:ml-8 transition-opacity duration-700 ease-out ${
             mounted ? "opacity-100" : "opacity-0"
@@ -218,7 +226,7 @@ export function FightCard({ fightId, fightLabel, fighterA, fighterB, mockVotes, 
                 src={fighterA.image || "/placeholder.svg"}
                 alt={fighterA.name}
                 fill
-                className={`object-contain object-bottom transition-opacity duration-[1200ms] ease-out ${
+                className={`fighter-image object-contain transition-opacity duration-[1200ms] ease-out ${
                   showFighters ? "opacity-100" : "opacity-0"
                 }`}
                 style={{
@@ -273,7 +281,7 @@ export function FightCard({ fightId, fightLabel, fighterA, fighterB, mockVotes, 
                 src={fighterB.image || "/placeholder.svg"}
                 alt={fighterB.name}
                 fill
-                className={`object-contain object-bottom transition-opacity duration-[1200ms] ease-out ${
+                className={`fighter-image object-contain transition-opacity duration-[1200ms] ease-out ${
                   showFighters ? "opacity-100" : "opacity-0"
                 }`}
                 style={{

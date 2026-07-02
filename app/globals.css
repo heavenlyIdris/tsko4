@@ -109,11 +109,19 @@ body {
    --m-shift : mobile translateY (default -10%) – negative = shift up to reduce headroom */
 .fighter-img-wrap {
   transform-origin: center bottom;
-  transform: translateY(var(--m-shift, 0%)) scale(var(--m-scale, 1));
+  transform: translate(var(--m-shift-x, 0%), var(--m-shift, 0%)) scale(var(--m-scale, 1));
+}
+
+.fighter-image {
+  object-position: var(--m-object-position, center bottom);
 }
 
 @media (min-width: 768px) {
   .fighter-img-wrap {
-    transform: scale(var(--d-scale, 1));
+    transform: translateX(var(--d-shift-x, 0%)) scale(var(--d-scale, 1));
+  }
+
+  .fighter-image {
+    object-position: var(--d-object-position, center bottom);
   }
 }
